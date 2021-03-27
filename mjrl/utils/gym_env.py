@@ -5,6 +5,8 @@ Wrapper around a gym env that provides convenience functions
 import gym
 import numpy as np
 
+import d4rl
+
 
 class EnvSpec(object):
     def __init__(self, obs_dim, act_dim, horizon):

@@ -188,3 +188,26 @@ def d4rl2paths(dataset):
             if 'metadata' not in key: path[key] = dataset[key][timeouts[idx]: timeouts[idx+1]]
         paths.append(path)
     return paths
+
+
+def d4rl_from_nopg_2paths(dataset):
+    """
+    Convert d4rl dataset to paths (list of dictionaries)
+    :param dataset: dataset in d4rl format (type dictionary)
+    :return: paths object. List of trajectories where each trajectory is a dictionary
+    """
+    # assert 'timeouts' in dataset.keys()
+    assert 'lasts' in dataset.keys()
+    num_samples = dataset['observations'].shape[0]
+    # timeouts = [t+1 for t, term in enumerate(dataset['timeouts']) if term]
+    # timeouts = [t+1 for t in range(num_samples) if (dataset['timeouts'][t] or dataset['terminals'][t])]
+    timeouts = [t+1 for t in range(num_samples) if (dataset['lasts'][t])]
+    if timeouts[-1] != dataset['observations'].shape[0]:  timeouts.append(dataset['observations'].shape[0])
+    timeouts.insert(0, 0)
+    paths = []
+    for idx in range(len(timeouts) - 1):
+        path = dict()
+        for key in dataset.keys():
+            if 'metadata' not in key: path[key] = dataset[key][timeouts[idx]: timeouts[idx+1]]
+        paths.append(path)
+    return paths
