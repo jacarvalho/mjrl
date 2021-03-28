@@ -13,7 +13,7 @@
 'device'        :   'cuda',
 'learn_reward'  :   True,
 'data_file'     :   'datasets/maze2d_umaze_v1_10000.pickle',
-'model_file'    :   'maze2d_umaze_10000_models_seed_3.pickle',
+'model_file'    :   'models/maze2d_umaze_10000_models_seed_3.pickle',
 'bc_init'       :   True,
 'pessimism_coef':   3.0,
 'truncate_reward' : 0.0,

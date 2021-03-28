@@ -13,7 +13,7 @@
 'device'        :   'cuda',
 'learn_reward'  :   True,
 'data_file'     :   'datasets/pendulum_v0_50000.pickle',
-'model_file'    :   'pendulum_50000_models_seed_1.pickle',
+'model_file'    :   'models/pendulum_50000_models_seed_1.pickle',
 'bc_init'       :   True,
 'pessimism_coef':   3.0,
 'truncate_reward' : 0.0,

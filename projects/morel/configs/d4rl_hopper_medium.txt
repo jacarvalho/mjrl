@@ -13,7 +13,7 @@
 'learn_reward'  :   False,
 'data_file'     :   'datasets/hopper-medium-v0.pickle',
 'reward_file'   :   '../model_based_npg/utils/reward_functions/gym_hopper.py',
-'model_file'    :   'hopper-medium-v0-models.pickle',
+'model_file'    :   'models/hopper-medium-v0-models.pickle',
 'bc_init'       :   True,
 'pessimism_coef':   3.0,
 'truncate_reward' : 0.0,
