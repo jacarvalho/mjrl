@@ -17,7 +17,7 @@
 'bc_init'       :   True,
 'pessimism_coef':   3.0,
 'truncate_reward' : 0.0,
-'exp_notes'     :   'Maze2d.',
+'exp_notes'     :   'pendulum',
 
 # dynamics learning
 
