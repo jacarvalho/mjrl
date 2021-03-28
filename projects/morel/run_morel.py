@@ -240,6 +240,7 @@ if 'bc_init' in job_data.keys():
 for outer_iter in range(job_data['num_iter']):
     ts = timer.time()
     agent.to(job_data['device'])
+    logger.log_kv('iter', outer_iter)
     if job_data['start_state'] == 'init':
         print('sampling from initial state distribution')
         buffer_rand_idx = np.random.choice(len(init_states_buffer), size=job_data['update_paths'], replace=True).tolist()
@@ -263,26 +264,30 @@ for outer_iter in range(job_data['num_iter']):
     agent.policy.to('cpu')
     
     # evaluate true policy performance
-    if job_data['eval_rollouts'] > 0:
-        print("Performing validation rollouts ... ")
-        # set the policy device back to CPU for env sampling
-        eval_paths = evaluate_policy(agent.env, agent.policy, agent.learned_model[0], noise_level=0.0,
-                                     real_step=True, num_episodes=job_data['eval_rollouts'], visualize=False)
-        eval_score = np.mean([np.sum(p['rewards']) for p in eval_paths])
-        logger.log_kv('eval_score', eval_score)
-        try:
-            eval_metric = e.env.env.evaluate_success(eval_paths)
-            logger.log_kv('eval_metric', eval_metric)
-        except:
-            pass
-    else:
-        eval_score = -1e8
+    eval_score = -1e6
+    if (outer_iter % job_data['eval_every_n_iter'] == 0) or outer_iter == job_data['num_iter'] - 1:
+        if job_data['eval_rollouts'] > 0:
+            print("Performing validation rollouts ... ")
+            # set the policy device back to CPU for env sampling
+            eval_paths = evaluate_policy(agent.env, agent.policy, agent.learned_model[0], noise_level=0.0,
+                                         real_step=True, num_episodes=job_data['eval_rollouts'], visualize=False)
+            eval_score = np.mean([np.sum(p['rewards']) for p in eval_paths])
+            logger.log_kv('eval_score', eval_score)
+            try:
+                eval_metric = e.env.env.evaluate_success(eval_paths)
+                logger.log_kv('eval_metric', eval_metric)
+            except:
+                pass
 
-    # track best performing policy
-    policy_score = eval_score if job_data['eval_rollouts'] > 0 else rollout_score
-    if policy_score > best_perf:
-        best_policy = copy.deepcopy(policy) # safe as policy network is clamped to CPU
-        best_perf = policy_score
+            # track best performing policy
+            policy_score = eval_score if job_data['eval_rollouts'] > 0 else rollout_score
+            if policy_score > best_perf:
+                best_policy = copy.deepcopy(policy) # safe as policy network is clamped to CPU
+                best_perf = policy_score
+        else:
+            logger.log_kv('eval_score', eval_score)
+    else:
+        logger.log_kv('eval_score', eval_score)
 
     tf = timer.time()
     logger.log_kv('iter_time', tf-ts)
@@ -299,7 +304,7 @@ for outer_iter in range(job_data['num_iter']):
         # make observation mask part of policy for easy deployment in environment
         old_in_scale = policy.in_scale
         for pi in [policy, best_policy]: pi.set_transformations(in_scale = 1.0 / e.obs_mask)
-        pickle.dump(agent, open(OUT_DIR + '/iterations/agent_' + str(outer_iter) + '.pickle', 'wb'))
+        # pickle.dump(agent, open(OUT_DIR + '/iterations/agent_' + str(outer_iter) + '.pickle', 'wb'))
         pickle.dump(policy, open(OUT_DIR + '/iterations/policy_' + str(outer_iter) + '.pickle', 'wb'))
         pickle.dump(best_policy, open(OUT_DIR + '/iterations/best_policy.pickle', 'wb'))
         agent.to(job_data['device'])

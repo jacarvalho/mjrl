@@ -247,7 +247,8 @@ def evaluate_policy(e, policy, learned_model, noise_level=0.0,
         env_infos = []
         t = 0
         done = False
-        while t < e.horizon and done is False:
+
+        while (t < e.horizon) and (not done):
             o = e.get_obs()
             ifo = e.get_env_infos()
             a = policy.get_action(o)

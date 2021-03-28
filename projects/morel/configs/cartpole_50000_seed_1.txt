@@ -2,21 +2,22 @@
 
 # general inputs
 
-'env_name'      :   'maze2d-umaze-v1',
+'env_name'      :   'CartpoleStabilization-v1',
 'act_repeat'    :   1,
 'seed'          :   1,
 'num_iter'      :   500,
+'eval_every_n_iter': 50,
 'eval_rollouts' :   10,
 'num_models'    :   4,
 'save_freq'     :   25,
 'device'        :   'cuda',
 'learn_reward'  :   True,
-'data_file'     :   'datasets/maze2d_umaze_v1_100000.pickle',
-'model_file'    :   'maze2d_umaze_100000_models.pickle',
+'data_file'     :   'datasets/cartpolestabilization_v1_50000.pickle',
+'model_file'    :   'cartpole_50000_models_seed_1.pickle',
 'bc_init'       :   True,
 'pessimism_coef':   3.0,
 'truncate_reward' : 0.0,
-'exp_notes'     :   'Example to illustrate MOReL on a D4RL task.',
+'exp_notes'     :   'Maze2d.',
 
 # dynamics learning
 
@@ -31,7 +32,7 @@
 
 # NPG params
 
-'policy_size'   :   (64, 32),
+'policy_size'   :   (50,),
 'step_size'     :   0.02,
 'init_log_std'  :   -0.25,
 'min_log_std'   :   -1.0,
@@ -39,7 +40,7 @@
 'gae_lambda'    :   0.97,
 'update_paths'  :   50,
 'start_state'   :   'init',
-'horizon'       :   300,
+'horizon'       :   500,
 'npg_hp'        :   dict(FIM_invert_args={'iters': 20, 'damping': 1e-3}),
 
 }

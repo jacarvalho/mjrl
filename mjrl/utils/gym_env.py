@@ -6,6 +6,7 @@ import gym
 import numpy as np
 
 import d4rl
+from src.envs.all_envs import *
 
 
 class EnvSpec(object):

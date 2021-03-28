@@ -4,19 +4,20 @@
 
 'env_name'      :   'maze2d-umaze-v1',
 'act_repeat'    :   1,
-'seed'          :   0,
+'seed'          :   2,
 'num_iter'      :   500,
-'eval_rollouts' :   10,
+'eval_every_n_iter': 50,
+'eval_rollouts' :   100,
 'num_models'    :   4,
 'save_freq'     :   25,
 'device'        :   'cuda',
 'learn_reward'  :   True,
-'data_file'     :   'datasets/maze2d_umaze_v1_1000.pickle',
-'model_file'    :   'maze2d_umaze_1000_models.pickle',
+'data_file'     :   'datasets/maze2d_umaze_v1_5000.pickle',
+'model_file'    :   'maze2d_umaze_5000_models_seed_2.pickle',
 'bc_init'       :   True,
 'pessimism_coef':   3.0,
 'truncate_reward' : 0.0,
-'exp_notes'     :   'Example to illustrate MOReL on a D4RL task.',
+'exp_notes'     :   'Maze2d.',
 
 # dynamics learning
 
