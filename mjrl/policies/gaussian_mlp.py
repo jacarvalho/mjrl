@@ -47,8 +47,8 @@ class MLP(torch.nn.Module):
         # ------------------------
         self.layer_sizes = (self.observation_dim, ) + hidden_sizes + (self.action_dim, )
 
-        # self.nonlinearity = torch.tanh
-        self.nonlinearity = torch.relu
+        self.nonlinearity = torch.tanh
+        # self.nonlinearity = torch.relu
 
         self.fc_layers = torch.nn.ModuleList([torch.nn.Linear(self.layer_sizes[i], self.layer_sizes[i+1])
                                              for i in range(len(self.layer_sizes)-1)])

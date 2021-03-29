@@ -33,14 +33,14 @@
 # NPG params
 
 'policy_size'   :   (50,),
-'step_size'     :   0.02,
+'step_size'     :   0.005,
 'init_log_std'  :   -0.25,
-'min_log_std'   :   -1.0,
+'min_log_std'   :   -3.0,
 'gamma'         :   0.99,
 'gae_lambda'    :   0.97,
 'update_paths'  :   50,
 'start_state'   :   'init',
-'horizon'       :   500,
+'horizon'       :   100,
 'npg_hp'        :   dict(FIM_invert_args={'iters': 20, 'damping': 1e-3}),
 
 }
