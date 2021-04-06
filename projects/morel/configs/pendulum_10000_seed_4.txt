@@ -21,7 +21,7 @@
 
 # dynamics learning
 
-'hidden_size'   :   (128, 128),
+'hidden_size'   :   (32, 32),
 'activation'    :   'relu',
 'fit_lr'        :   1e-3,
 'fit_wd'        :   0.0,
