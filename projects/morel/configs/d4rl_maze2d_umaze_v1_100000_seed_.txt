@@ -1,0 +1,46 @@
+{
+
+# general inputs
+
+'env_name'      :   'maze2d-umaze-v1',
+'act_repeat'    :   1,
+'seed'          :   0,
+'num_iter'      :   500,
+'eval_every_n_iter': 50,
+'eval_rollouts' :   100,
+'num_models'    :   4,
+'save_freq'     :   25,
+'device'        :   'cuda',
+'learn_reward'  :   True,
+'data_file'     :   'datasets/maze2d_umaze_v1_100000.pickle',
+'model_file'    :   'models/maze2d_umaze_100000_models_seed_0.pickle',
+'bc_init'       :   True,
+'pessimism_coef':   3.0,
+'truncate_reward' : 0.0,
+'exp_notes'     :   'Maze2d.',
+
+# dynamics learning
+
+'hidden_size'   :   (32, 32),
+'activation'    :   'relu',
+'fit_lr'        :   1e-3,
+'fit_wd'        :   0.0,
+'fit_mb_size'   :   256,
+'fit_epochs'    :   25,
+'refresh_fit'   :   False,
+'max_steps'     :   1e8,
+
+# NPG params
+
+'policy_size'   :   (64, 32),
+'step_size'     :   0.005,
+'init_log_std'  :   -0.25,
+'min_log_std'   :   -3.0,
+'gamma'         :   0.99,
+'gae_lambda'    :   0.97,
+'update_paths'  :   50,
+'start_state'   :   'init',
+'horizon'       :   300,
+'npg_hp'        :   dict(FIM_invert_args={'iters': 20, 'damping': 1e-3}),
+
+}

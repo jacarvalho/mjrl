@@ -1,0 +1,46 @@
+{
+
+# general inputs
+
+'env_name'      :   'CartpoleStabilization-v1',
+'act_repeat'    :   1,
+'seed'          :   0,
+'num_iter'      :   500,
+'eval_every_n_iter': 50,
+'eval_rollouts' :   10,
+'num_models'    :   4,
+'save_freq'     :   25,
+'device'        :   'cuda',
+'learn_reward'  :   True,
+'data_file'     :   'datasets/cartpolestabilization_v1_5000.pickle',
+'model_file'    :   'models/cartpole_5000_models_seed_0.pickle',
+'bc_init'       :   True,
+'pessimism_coef':   3.0,
+'truncate_reward' : 0.0,
+'exp_notes'     :   'cartpole',
+
+# dynamics learning
+
+'hidden_size'   :   (128, 128),
+'activation'    :   'relu',
+'fit_lr'        :   1e-3,
+'fit_wd'        :   0.0,
+'fit_mb_size'   :   256,
+'fit_epochs'    :   25,
+'refresh_fit'   :   False,
+'max_steps'     :   1e8,
+
+# NPG params
+
+'policy_size'   :   (50,),
+'step_size'     :   0.02,
+'init_log_std'  :   -0.25,
+'min_log_std'   :   -3.0,
+'gamma'         :   0.99,
+'gae_lambda'    :   0.97,
+'update_paths'  :   50,
+'start_state'   :   'init',
+'horizon'       :   100,
+'npg_hp'        :   dict(FIM_invert_args={'iters': 20, 'damping': 1e-3}),
+
+}
